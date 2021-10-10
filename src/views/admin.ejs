@@ -1,0 +1,63 @@
+<%- include ('partials/header.ejs')-%>
+<div class="row">
+    <div class="col-md-4">
+        <div class="container mt-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Registrar nuevo usuario</h5>
+                    <form action="/newuser" method="post">
+                        <div class="form-group">
+                            <input type="text" name="Nombre" class="form-control" placeholder="Nombre de usuario" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="Contra" class="form-control" placeholder="Contraseña " required>
+                        </div>
+                        <div class="form-group">
+                            <select name="Permisos" class="form-control">
+                                <option value="1">Vendedor</option>
+                                <option value="2">Administrador</option>
+                            </select>
+                        </div>
+                        </datalist>
+                        <button type="submit" class="btn btn-outline-primary btn-block">Guardar usuario</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 mt-2">
+      <div class="container">
+        <input type="text" class="form-control" placeholder="Buscar" id="search">
+        <div class="table-responsive">
+          <table class="table table-bordered mt-2 table-hover text-center">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nombre de usuario</th>
+                <th>Permisos de usuario</th>
+              </tr>
+            </thead>
+            <tbody id="tbodySales">
+                <% for (let i = 0; i < users.length; i++) {%>
+                    <tr>
+                        <th><%= users[i].IDUsuario%></th>
+                        <td><%= users[i].Nombre%></td>
+                        <%if(users[i].Permisos==1){%>
+                            <td>Administrador</td>
+                        <%}else {%>
+                            <td>Vendedor</td>
+                        <%}%>
+                    </tr>
+                <%}%>  
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+</div>
+<script type="module">
+  import {liveSearch} from '/js/liveSearch.js'
+      const searchInput = document.getElementById('search')
+      const tableBody = document.getElementById('tbodySales')
+      liveSearch(searchInput,tableBody)
+  </script>

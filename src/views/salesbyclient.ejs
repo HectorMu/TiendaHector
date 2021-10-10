@@ -1,0 +1,98 @@
+<%- include ('partials/header.ejs')-%>
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex">
+            <a href="/sales" class="btn btn-secondary">Volver</a>
+            <h3 class="card-text text-center ml-5">Compras cliente <%=clientName[0].Nombre%></h3>
+        </div>
+    </div>
+</div>
+<div class="container mt-2">
+    <% if(error_msg.length>0){%>
+      <%-include('warnings/alert.ejs');-%>
+    <%}%>
+    <% if(success_msg.length>0){%>
+      <%-include('warnings/success.ejs');-%>
+  <%}%>
+    <div class="table-responsive">
+      <table class="table table-bordered mt-2 table-hover text-center">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Cantidad</th>
+            <th>Opciones</th>
+          </tr>
+        </thead>
+        <tbody id="tbodySales">
+            <%for(let i=0; i < clientSales.length; i++) {%>
+                <tr>
+                  <td><%=clientSales[i].Fecha %></td>
+                  <td><%=clientSales[i].Cantidad %></td>
+                  <td>
+                    <div id="optButtons" class="d-flex flex-column">
+                      <button type="button" data-toggle="modal" data-target="#editSale<%=clientSales[i].IDCompra%>" class="btn btn-primary my-1 w-100" style="border:0px">Corregir</button>
+                      <button type="button" data-toggle="modal" data-target="#deleteSale<%=clientSales[i].IDCompra%>" class="btn btn-danger w-100" style="border:0px">Eliminar</button>
+                    </div>
+                  </td>
+                </tr>
+              <%}%> 
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+<% for (let i=0; i < clientSales.length; i++){%>
+      <!--Delete modal-->
+      <div>
+        <div class="container-fluid">
+            <div id="deleteSale<%=clientSales[i].IDCompra%>" class="modal fade modal-fullscreen-sm-down" tabindex="-1">
+                <div class="modal-dialog modal-md">
+                  <div class="modal-content ">
+                    <div class="modal-header bg-dark">
+                      <h5 class="modal-title text-white" style="font-weight: bold; font-size: 34px;">¿Eliminar venta?</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="text-white">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                            <a href="/deleteSale/<%=clientSales[i].IDCompra%>" class="btn btn-outline-danger  btn-block" >Delete</a>
+                            <button type="button" data-dismiss="modal" class="btn btn-outline-dark btn-block">Cancel</button>                                
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+    <!--/Delete modal-->
+<%}%>
+<% for (let i = 0;  i< clientSales.length; i++){%>
+  <!--edit  modal-->
+  <div>
+    <div class="container-fluid">
+        <div id="editSale<%= clientSales[i].IDCompra %>" class="modal fade modal-fullscreen-sm-down" tabindex="-1">
+            <div class="modal-dialog modal-md">
+              <div class="modal-content ">
+                <div class="modal-header bg-dark">
+                  <h5 class="modal-title text-white" style="font-weight: bold; font-size: 34px;">Corregir venta</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="text-white">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form action="/editsale/<%=clientSales[i].IDCompra%>" method="post">
+                      <div class="form-group">
+                        <p>Cantidad actual: <%=clientSales[i].Cantidad %></p>
+                        <input type="text" name="Cantidad" placeholder="Ingrese la cantidad corregida" class="form-control" required>
+                      </div>
+                      <button type="submit" class="btn btn-outline-primary btn-block">Guardar</button>  
+                      <button type="button" data-dismiss="modal" class="btn btn-outline-dark btn-block">Cancelar</button>                    
+                  </form>                       
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+<!--/edit modal-->
+<%}%> 
+<%- include ('partials/footer.ejs')-%>

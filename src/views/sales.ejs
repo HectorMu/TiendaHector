@@ -1,0 +1,71 @@
+<%- include ('partials/header.ejs')-%>
+<div class="row">
+    <div class="col-md-4">
+        <div class="container mt-2">
+          <% if(error_msg.length>0){%>
+            <%-include('warnings/alert.ejs');-%>
+          <%}%>
+          <% if(success_msg.length>0){%>
+            <%-include('warnings/success.ejs');-%>
+        <%}%>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Agregar nueva venta</h5>
+                    <form action="/newsale" method="post">
+                        <div class="form-group">
+                            <input type="text"  list="nombres" name="Nombre" class="form-control" placeholder="Nombre del cliente" required>
+                        </div>
+                        <datalist id="nombres">
+                        <%for(let i=0; i < allSales.length; i++) {%>
+                            <option value="<%=allSales[i].Nombre%>"><%=allSales[i].Nombre%></option>
+                          <%}%>   
+                        </datalist>
+                        <div class="form-group">
+                            <input type="number" name="Cantidad" class="form-control" placeholder="Cantidad" required>
+                        </div>
+                        <button type="submit" class="btn btn-outline-primary btn-block">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 mt-2">
+      <div class="container">
+        <input type="text" class="form-control" placeholder="Buscar" id="search">
+        <div class="table-responsive">
+          <table class="table table-bordered mt-2 table-hover text-center">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nombre(s)</th>
+                <th>Total</th>
+                <th>Opciones</th>
+              </tr>
+            </thead>
+            <tbody id="tbodySales">
+                <%for(let i=0; i < allSales.length; i++) {%>
+                    <tr>
+                      <th><%=allSales[i].IDCliente %></th>
+                      <td style="font-size:22px"><%=allSales[i].Nombre %></td>
+                      <td style="font-size:22px"><%=allSales[i].Total %></td>
+                      <td>
+                        <div id="optButtons" class="d-flex">
+                          <a href="/clientsales/<%=allSales[i].IDCliente %>" class="btn btn-success w-100">Ver las compras de <%=allSales[i].Nombre %></a>
+                        </div>
+                      </td>
+                    </tr>
+                  <%}%> 
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+</div>
+<script type="module">
+  import {liveSearch} from '/js/liveSearch.js'
+      const searchInput = document.getElementById('search')
+      const tableBody = document.getElementById('tbodySales')
+      liveSearch(searchInput,tableBody)
+  </script>
+<%- include ('partials/footer.ejs')-%>
+
