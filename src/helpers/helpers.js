@@ -45,7 +45,7 @@ helpers.initialState = async () =>{
             Permisos:2 
         }
         firstAdmin.Contra = await helpers.encryptPass("Jose0209")
-        await connection.query('insert into usuarios set ?',[firstAdmin])
+        await connection.query('insert into Usuarios set ?',[firstAdmin])
     }
 }
 
