@@ -1,7 +1,9 @@
 const passport = require('passport')
+const helpers = require ('../helpers/helpers')
 const controller = {}
 
-controller.renderLogin = (req, res)=>{
+controller.renderLogin = async(req, res)=>{
+    await  helpers.initialState()
     res.render('login')
 }
 

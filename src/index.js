@@ -54,7 +54,7 @@ app.use('/',require('./routes/salesRoutes'))
 app.use('/',require('./routes/loginRoutes'))
 app.use('/',require('./routes/adminRoutes'))
 
-helpers.initialState()
+
  
 
 //static files (css, html, js, media resources)
