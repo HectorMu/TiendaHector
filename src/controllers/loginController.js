@@ -3,11 +3,6 @@ const helpers = require ('../helpers/helpers')
 const controller = {}
 
 controller.renderLogin = async(req, res)=>{
-    try {
-        await  helpers.initialState()
-    } catch (error) {
-        console.log(error)
-    }
     res.render('login')
 }
 
