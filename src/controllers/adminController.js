@@ -3,7 +3,7 @@ const helpers = require ('../helpers/helpers')
 const controller = {}
 
 controller.renderAdminView = async(req, res)=>{
-    const users = await connection.query('select * from usuarios')
+    const users = await connection.query('select * from Usuarios')
     res.render('admin',{users})
 }
 
@@ -15,7 +15,7 @@ controller.addNewUser = async (req, res)=>{
         Permisos
     }
     newUser.Contra = await helpers.encryptPass(Contra)
-    await connection.query('insert into usuarios set ?',[newUser])
+    await connection.query('insert into Usuarios set ?',[newUser])
     res.redirect('/admin')
 }
 

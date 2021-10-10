@@ -8,7 +8,7 @@ passport.use('local.login', new passportLocal({
     passwordField:'password',
     passReqToCallback: true
 }, async (req, username, password, done)=>{
-    const rows = await connection.query('select * from usuarios where Nombre = ?',[username])
+    const rows = await connection.query('select * from Usuarios where Nombre = ?',[username])
     if(rows.length> 0){
         const user = rows[0]
         if(await helpers.validatePass(password,user.Contra)){
@@ -26,6 +26,6 @@ passport.serializeUser((user,done)=>{
 })
 
 passport.deserializeUser(async(id, done)=>{
-    const rows = await connection.query('select * from usuarios where IDUsuario = ?',[id])
+    const rows = await connection.query('select * from Usuarios where IDUsuario = ?',[id])
     done(null, rows[0])
 })
