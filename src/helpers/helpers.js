@@ -3,13 +3,13 @@ const bcrypt = require('bcryptjs')
 const helpers = {}
 
 helpers.VerifyClientExistence = async (nombre) =>{
-    const results = await connection.query(`select * from clientes where Nombre = '${nombre}'`)
+    const results = await connection.query(`select * from Clientes where Nombre = '${nombre}'`)
     console.log(results)
     return results.length > 0 ? true : false;
 }
 
 helpers.getClientId = async (nombre) =>{
-    const results = await connection.query(`select IDCliente from clientes where Nombre = '${nombre}'`)
+    const results = await connection.query(`select IDCliente from Clientes where Nombre = '${nombre}'`)
     return results[0].IDCliente
 }
 helpers.formatDate = (date) =>{
@@ -19,7 +19,7 @@ helpers.formatDate = (date) =>{
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
     minutes = minutes < 10 ? '0'+minutes : minutes;
-    let strTime = hours + ':' + minutes + ' ' + ampm;
+    let strTime = hours-5 + ':' + minutes + ' ' + ampm;
     return strTime;
 }
 
@@ -37,7 +37,7 @@ helpers.validatePass = async(pass, savedPass)=>{
     }
 }
 helpers.initialState = async () =>{
-    const superUser = await connection.query('select Permisos from usuarios where Permisos = 2')
+    const superUser = await connection.query('select Permisos from Usuarios where Permisos = 2')
     if(!superUser.length){
         const firstAdmin = {
             Nombre: "HectorMuñoz",
