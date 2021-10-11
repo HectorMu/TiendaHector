@@ -52,7 +52,10 @@ app.use((req, res, next) => {
 app.use('/',require("./routes/indexRoutes.js"))
 app.use('/',require('./routes/salesRoutes'))
 app.use('/',require('./routes/loginRoutes'))
+app.use('/',require('./routes/usersRoutes'))
 app.use('/',require('./routes/adminRoutes'))
+app.use('/',require('./routes/vendorRoutes'))
+
 
 
  

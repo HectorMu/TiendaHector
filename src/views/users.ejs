@@ -1,4 +1,5 @@
 <%- include ('partials/header.ejs')-%>
+
 <div class="row">
     <div class="col-md-4">
         <div class="container mt-2">
@@ -14,8 +15,8 @@
                         </div>
                         <div class="form-group">
                             <select name="Permisos" class="form-control">
-                                <option value="1">Vendedor</option>
-                                <option value="2">Administrador</option>
+                                <option value="1">Administrador</option>
+                                <option value="2">Vendedor</option>
                             </select>
                         </div>
                         </datalist>
@@ -61,3 +62,5 @@
       const tableBody = document.getElementById('tbodySales')
       liveSearch(searchInput,tableBody)
   </script>
+
+<%- include ('partials/footer.ejs')-%>

@@ -9,4 +9,11 @@ auth.isLoggedIn =(req, res, next)=>{
     }
 }
 
+auth.IsAdmin = (req, res, next)=>{
+   if(req.user.Permisos == 1){
+       return next()
+   }
+   return res.redirect('/sales')
+}
+
 module.exports = auth
