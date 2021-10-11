@@ -31,8 +31,8 @@
                           const btnGuardar = document.getElementById('btnGuardar')
                           const fecha = document.getElementById('inputFecha')
                           btnGuardar.addEventListener('click',()=>{
-                          let dateObject = new Date()
-                           const formatDate = (date) =>{
+                            let today = new Date()
+                           const formatDateTime = (date) =>{
                               let hours = date.getHours();
                               let minutes = date.getMinutes();
                               let ampm = hours >= 12 ? 'pm' : 'am';
@@ -42,10 +42,9 @@
                               let strTime = hours + ':' + minutes + ' ' + ampm;
                               return strTime;
                           }
-                          let saleDate = (dateObject.getDate()+"/"+"0"+dateObject.getMonth()+"/"+dateObject.getFullYear() +" "+formatDate(dateObject))
+                          let saleDate = (today.toLocaleDateString("en-US")+" "+formatDateTime(today))
                           fecha.value = saleDate
-                          })
-                           
+                          })               
                         </script>
                     </form>
                 </div>
