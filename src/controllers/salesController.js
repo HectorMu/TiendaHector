@@ -1,7 +1,5 @@
 const connection = require('../database')
 const helpers = require ('../helpers/helpers')
-let dateObject = new Date()
-let saleDate = (dateObject.getDate()+"/"+"0"+dateObject.getMonth()+"/"+dateObject.getFullYear() +" "+helpers.formatDate(dateObject))
 const controller = {}
 
 controller.renderSalesView = async(req, res)=>{
@@ -11,7 +9,7 @@ controller.renderSalesView = async(req, res)=>{
     })
 }
 controller.saveSale = async(req, res)=>{
-    const {Nombre, Cantidad} = req.body
+    const {Nombre, Cantidad,Fecha} = req.body
   
     //if the client is already registered
     if(await helpers.VerifyClientExistence(Nombre)){
@@ -19,7 +17,7 @@ controller.saveSale = async(req, res)=>{
         const newSale = {
             Cantidad,
             FkCliente: gettedID,
-            Fecha: saleDate
+            Fecha,
         }
         await connection.query('insert into Compras set ?',[newSale])
         req.flash("success_msg",`Guardado, el cliente ${Nombre} suma ${Cantidad} pesos`)
@@ -31,7 +29,7 @@ controller.saveSale = async(req, res)=>{
         const newSale = {
             Cantidad,
             FkCliente: gettedID,
-            Fecha:saleDate
+            Fecha
         }
         await connection.query('insert into Compras set ?',[newSale])
         req.flash("success_msg",`Guardado, cliente ${Nombre} registrado, inicia con ${Cantidad} pesos`)
