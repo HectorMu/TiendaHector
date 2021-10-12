@@ -1,0 +1,42 @@
+<%- include ('partials/header.ejs')-%>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/admin">Inicio</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Ventas</li>
+    </ol>
+  </nav>
+<div class="row">
+    <div class="col-md-10 col-lg-12 mt-2">
+      <div class="container">
+        <h1 class="text-center">Todas las ventas</h1>
+        <h4 class="text-center">En total se han vendido: <%=Total%> pesos, desde el <%=startDate.split(' ')[0]%> hasta el <%=endDate.split(' ')[0]%></h4>
+        <div class="table-responsive">
+          <table class="table table-bordered mt-2 table-hover text-center">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Cantidad</th>
+                <th>Fecha</th>
+                <!-- <th>Opciones</th> -->
+              </tr>
+            </thead>
+            <tbody id="tbodySales">
+                <%for(let i=0; i < sales.length; i++) {%>
+                    <tr>
+                      <th><%=sales[i].IDCompra %></th>
+                      <td style="font-size:22px"><%=sales[i].Cantidad %></td>
+                      <td style="font-size:22px"><%=sales[i].Fecha %></td>
+                      <!-- <td>
+                        <div id="optButtons" class="d-flex">
+                          
+                        </div>
+                      </td> -->
+                    </tr>
+                  <%}%> 
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+</div>
+<%- include ('partials/footer.ejs')-%>

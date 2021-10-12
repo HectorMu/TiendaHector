@@ -37,14 +37,6 @@ controller.saveSale = async(req, res)=>{
     }
 }
 
-// controller.deleteAllClientData = async(req, res)=>{
-//     const {IDCliente} = req.params;
-//     await connection.query(`delete from compras where FkCliente = ${IDCliente}`)
-//     await connection.query(`delete from clientes where IDCliente = ${IDCliente}`)
-//     res.redirect('/sales')
-// }
-
-
 controller.renderByClientSalesView = async(req, res)=>{
     const {IDCliente}= req.params;
     const clientSales = await connection.query(`select * from Compras where FkCliente =  ${IDCliente} ORDER BY IDCompra DESC`)

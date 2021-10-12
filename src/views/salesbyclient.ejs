@@ -1,4 +1,15 @@
 <%- include ('partials/header.ejs')-%>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+      <% if(user.Permisos == 1){%>
+          <li class="breadcrumb-item"><a href="/admin">Inicio</a></li>
+      <%}else {%>
+          <li class="breadcrumb-item"><a href="/vendor">Inicio</a></li>
+      <%}%>
+    <li class="breadcrumb-item"><a href="/sales">Concurso</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Compras <%=clientName[0].Nombre%></li>
+  </ol>
+</nav>
 <div class="card">
     <div class="card-body">
         <div class="d-flex">

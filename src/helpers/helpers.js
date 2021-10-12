@@ -12,16 +12,6 @@ helpers.getClientId = async (nombre) =>{
     const results = await connection.query(`select IDCliente from Clientes where Nombre = '${nombre}'`)
     return results[0].IDCliente
 }
-helpers.formatDate = (date) =>{
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    let ampm = hours >= 12 ? 'pm' : 'am';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0'+minutes : minutes;
-    let strTime = hours-5 + ':' + minutes + ' ' + ampm;
-    return strTime;
-}
 
 helpers.encryptPass = async(pass)=>{
     const salt = await bcrypt.genSalt(10)

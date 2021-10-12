@@ -1,12 +1,8 @@
 <%- include ('partials/header.ejs')-%>
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-      <% if(user.Permisos == 1){%>
-          <li class="breadcrumb-item"><a href="/admin">Inicio</a></li>
-      <%}else {%>
-          <li class="breadcrumb-item"><a href="/vendor">Inicio</a></li>
-      <%}%>
-    <li class="breadcrumb-item active" aria-current="page">Concurso</li>
+    <li class="breadcrumb-item"><a href="/admin">Inicio</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Productos</li>
   </ol>
 </nav>
 <div class="row">
@@ -20,13 +16,13 @@
         <%}%>
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title text-center">Agregar nueva venta</h5>
+                    <h5 class="card-title text-center">Agregar nuevo producto</h5>
                     <form action="/newsale" method="post">
                         <div class="form-group">
                             <input type="text"  list="nombres" name="Nombre" class="form-control" placeholder="Nombre del cliente" required>
                         </div>
                         <datalist id="nombres">
-                        <%for(let i=0; i < allSales.length; i++) {%>
+                        <%for(let i=0; i < products.length; i++) {%>
                             <option value="<%=allSales[i].Nombre%>"><%=allSales[i].Nombre%></option>
                           <%}%>   
                         </datalist>
@@ -37,25 +33,7 @@
                           <input hidden type="text" name="Fecha" class="form-control" id="inputFecha" required>
                         </div>
                         <button type="submit" id="btnGuardar"  class="btn btn-outline-primary btn-block">Guardar</button>
-                        <script>
-                          const btnGuardar = document.getElementById('btnGuardar')
-                          const fecha = document.getElementById('inputFecha')
-                          btnGuardar.addEventListener('click',()=>{
-                            let today = new Date()
-                           const formatDateTime = (date) =>{
-                              let hours = date.getHours();
-                              let minutes = date.getMinutes();
-                              let ampm = hours >= 12 ? 'pm' : 'am';
-                              hours = hours % 12;
-                              hours = hours ? hours : 12; // the hour '0' should be '12'
-                              minutes = minutes < 10 ? '0'+minutes : minutes;
-                              let strTime = hours + ':' + minutes + ' ' + ampm;
-                              return strTime;
-                          }
-                          let saleDate = (today.toLocaleDateString("en-US")+" "+formatDateTime(today))
-                          fecha.value = saleDate
-                          })               
-                        </script>
+                       
                     </form>
                 </div>
             </div>
@@ -69,8 +47,9 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>Nombre(s)</th>
-                <th>Total</th>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Unidad</th>
                 <th>Opciones</th>
               </tr>
             </thead>
@@ -100,4 +79,3 @@
       liveSearch(searchInput,tableBody)
   </script>
 <%- include ('partials/footer.ejs')-%>
-
